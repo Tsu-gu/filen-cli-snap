@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Filen CLI
+Exec=filen-cli
+Icon=${SNAP}/meta/gui/filen-cli.png
+Comment=CLI tool for accessing Filen Cloud
+Terminal=true
+Type=Application
+MimeType=x-content/unix-software;
