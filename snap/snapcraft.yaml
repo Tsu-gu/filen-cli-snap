@@ -1,0 +1,42 @@
+name: filen-cli
+base: core24
+version: '0.0.33'
+summary: Filen CLI tool
+description: |
+  Command line interface for Filen cloud storage. FUSE doesn't work.
+
+grade: stable
+confinement: strict
+
+apps:
+  filen-cli:
+    command: usr/bin/filen-cli
+    environment:
+      HOME: $SNAP_REAL_HOME
+      XDG_CONFIG_HOME: $SNAP_REAL_HOME/.config
+      XDG_DATA_HOME: $SNAP_REAL_HOME/.local/share
+    plugs:
+      - home
+      - network
+      - password-manager-service
+      - desktop
+      - fuse-support
+      - mount-observe 
+      - system-observe
+
+parts:
+  filen-cli:
+    plugin: nil
+    override-build: |
+      wget -O filen-cli https://github.com/FilenCloudDienste/filen-cli/releases/download/v${SNAPCRAFT_PROJECT_VERSION}/filen-cli-v${SNAPCRAFT_PROJECT_VERSION}-linux-x64
+      chmod +x filen-cli
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/bin
+      cp filen-cli $SNAPCRAFT_PART_INSTALL/usr/bin/
+    build-packages:
+      - wget
+    stage-packages:
+      - libsecret-1-0
+      - libglib2.0-0
+      - libgcrypt20
+      - fuse3
+      - libfuse3-3
