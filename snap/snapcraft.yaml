@@ -1,4 +1,4 @@
-name: filen-cli
+name: filen-cli-tsugu
 base: core24
 version: '0.0.33'
 summary: Filen CLI tool
@@ -9,12 +9,12 @@ grade: stable
 confinement: strict
 
 apps:
-  filen-cli:
-    command: usr/bin/filen-cli
+  filen-cli-tsugu:
+    command: usr/bin/filen-cli-tsugu
     environment:
-      HOME: $SNAP_REAL_HOME
-      XDG_CONFIG_HOME: $SNAP_REAL_HOME/.config
-      XDG_DATA_HOME: $SNAP_REAL_HOME/.local/share
+     HOME: $SNAP_USER_DATA
+     XDG_CONFIG_HOME: $SNAP_USER_DATA/.config
+     XDG_DATA_HOME: $SNAP_USER_DATA/.local/share
     plugs:
       - home
       - network
@@ -25,13 +25,13 @@ apps:
       - system-observe
 
 parts:
-  filen-cli:
+  filen-cli-tsugu:
     plugin: nil
     override-build: |
-      wget -O filen-cli https://github.com/FilenCloudDienste/filen-cli/releases/download/v${SNAPCRAFT_PROJECT_VERSION}/filen-cli-v${SNAPCRAFT_PROJECT_VERSION}-linux-x64
-      chmod +x filen-cli
+      wget -O filen-cli-tsugu https://github.com/FilenCloudDienste/filen-cli/releases/download/v${SNAPCRAFT_PROJECT_VERSION}/filen-cli-v${SNAPCRAFT_PROJECT_VERSION}-linux-x64
+      chmod +x filen-cli-tsugu
       mkdir -p $SNAPCRAFT_PART_INSTALL/usr/bin
-      cp filen-cli $SNAPCRAFT_PART_INSTALL/usr/bin/
+      cp filen-cli-tsugu $SNAPCRAFT_PART_INSTALL/usr/bin/
     build-packages:
       - wget
     stage-packages:
